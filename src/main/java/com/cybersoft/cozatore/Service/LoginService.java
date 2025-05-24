@@ -1,3 +1,4 @@
+// Service xử lý logic đăng nhập cho ứng dụng
 package com.cybersoft.cozatore.Service;
 
 import com.cybersoft.cozatore.Entity.UserEntity;
@@ -10,21 +11,24 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService implements LoginSeviceImp {
+    // Inject repository thao tác với bảng user
     @Autowired
     private UserRepository userRepository;
 
+    // Inject bean mã hóa mật khẩu
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public boolean CheckLogin(String username, String password) {
+    public UserEntity CheckLogin(String username, String password) {
+        // Tìm user theo email (username)
         UserEntity userEntity = userRepository.findByEmail(username);
 //      nếu truy vấn có dữ liệu tức user tồn tại
 //      kiểm tra password trong database có match với password user truyền lên hay không
       if (userEntity != null && passwordEncoder.matches(password, userEntity.getPassword())) {
-          return true;
+          return userEntity;
       }
-        return false;
+        return null;
     }
 
 }
