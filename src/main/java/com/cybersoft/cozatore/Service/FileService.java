@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 @Service
 public class FileService implements FileServiceImp {
@@ -17,15 +18,15 @@ public class FileService implements FileServiceImp {
     private String rootPath;
 
     @Override
-    public boolean save(MultipartFile file){
+    public void save(MultipartFile file){
         Path path = Paths.get(rootPath);
         try {
            if (!Files.exists(path)) {
                Files.createDirectories(path);
            }
+           Files.copy(file.getInputStream(), path.resolve(file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
        } catch (Exception e) {
             throw new RuntimeException("Error creating directory" + e.getMessage());
         }
-        return false;
     }
 }

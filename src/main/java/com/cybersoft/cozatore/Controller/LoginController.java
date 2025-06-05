@@ -41,7 +41,7 @@ public class LoginController {
          * Thường dùng để kiểm tra hoặc demo cách lấy dữ liệu từ token.
          * @return Dữ liệu (subject) bên trong token
          */
-        String data = jwtHelper.decodeToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJbe1wicm9sZVwiOlwiUk9MRV9BRE1JTlwifV0iLCJpYXQiOjE3NDkxMTE4MzcsImV4cCI6MTc0OTE5ODIzN30.UkdMicAfCQZt5yevH6k_ytFdG0b8Oz150pcrwIii5nzPRAPlM_d-7ujC8EIL7DhpvPal_xuvzZ2c15xETHZSUQ");
+        String data = jwtHelper.decodeToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJbe1wicm9sZVwiOlwiUk9MRV9BRE1JTlwifV0iLCJpYXQiOjE3NDkxMjI4MTcsImV4cCI6MTc0OTIwOTIxN30.L2inNmYZAb8Jbdq40Emzj7ck9Xo81xnxtJnepwiOQN432ul3VspGDVjCxZww6nLDqiZ7wO_ZfR6yQJkwyQmboQ");
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
