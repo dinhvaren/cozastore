@@ -53,7 +53,7 @@ public class SecurityConfig {
         return httpSecurity.csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login/**")
+                        .requestMatchers("/login/**","/category/**")
                         .permitAll()
                         .requestMatchers(HttpMethod.POST,"/product").hasRole("ADMIN")
                         .anyRequest()
