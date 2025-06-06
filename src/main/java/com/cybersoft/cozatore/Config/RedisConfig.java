@@ -16,10 +16,10 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 public class RedisConfig {
-    @Value("${redis.host}")
+    @Value("localhost")
     private String host;
 
-    @Value("${redis.port}")
+    @Value("6378")
     private int port;
 //  tạo kết nối tới redis
     @Bean
