@@ -3,11 +3,14 @@ package com.cybersoft.cozatore.Service;
 
 import com.cybersoft.cozatore.Service.imp.FileServiceImp;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -32,6 +35,21 @@ public class FileService implements FileServiceImp {
             Files.copy(file.getInputStream(), path.resolve(file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e) {
             throw new RuntimeException("Error creating directory" + e.getMessage());
+        }
+    }
+
+    @Override
+    public Resource load(String filename) {
+        try {
+                Path pathImage = Paths.get(rootPath).resolve(filename);
+                Resource resource = new UrlResource(pathImage.toUri());
+                if (resource.exists() || resource.isReadable()) {
+                    return resource;
+                }else  {
+                    throw new RuntimeException("Resource Not Read File: " + filename);
+                }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Resource Not Found" + e);
         }
     }
 }

@@ -40,6 +40,7 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // Lấy giá trị token mà client truyền trên header (thường là header Authorization)
+        System.out.println("doFilterInternal");
         String token = request.getHeader("Authorization");
         // Bước 1: lấy token từ giá trị của header, dùng Optional để tránh lỗi null
         Optional<String> tokenOptional = Optional.ofNullable(token);
